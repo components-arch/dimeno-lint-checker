@@ -8,7 +8,7 @@ package com.wangzhen.lintchecker.lintjar.rule;
 public class ThreadRule implements Rule {
     @Override
     public String getId() {
-        return "NewThread";
+        return "ThreadUsage";
     }
 
     @Override

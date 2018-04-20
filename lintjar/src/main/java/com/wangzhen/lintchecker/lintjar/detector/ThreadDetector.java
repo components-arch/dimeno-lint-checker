@@ -20,8 +20,7 @@ import java.util.List;
  * 线程检测
  * Created by wangzhen on 2018/4/15.
  */
-
-public abstract class ThreadDetector extends Detector implements Detector.JavaPsiScanner {
+public class ThreadDetector extends Detector implements Detector.JavaPsiScanner {
     private static final Rule rule = new ThreadRule();
     public static final Issue ISSUE = Issue.create(
             rule.getId(),
