@@ -11,25 +11,25 @@ import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiNewExpression;
 import com.wangzhen.lintchecker.lintjar.inter.Rule;
-import com.wangzhen.lintchecker.lintjar.rule.ThreadRule;
+import com.wangzhen.lintchecker.lintjar.rule.MessageRule;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
- * 线程检测
- * Created by wangzhen on 2018/4/15.
+ * Message检测
+ * Created by wangzhen on 2018/4/21.
  */
-public class ThreadDetector extends Detector implements Detector.JavaPsiScanner {
-    private static final Rule rule = new ThreadRule();
-    public static final Issue ISSUE = Issue.create(
+public class MessageDetector extends Detector implements Detector.JavaPsiScanner {
+    private static final Rule rule=new MessageRule();
+    public static Issue ISSUE=Issue.create(
             rule.getId(),
             rule.getBriefDescription(),
             rule.getExplanation(),
             Category.PERFORMANCE,
             5,
             Severity.ERROR,
-            new Implementation(ThreadDetector.class, Scope.JAVA_FILE_SCOPE)
+            new Implementation(MessageDetector.class, Scope.JAVA_FILE_SCOPE)
     );
 
     @Override
@@ -41,7 +41,6 @@ public class ThreadDetector extends Detector implements Detector.JavaPsiScanner 
     public void visitConstructor(JavaContext context, JavaElementVisitor visitor, PsiNewExpression node, PsiMethod constructor) {
         context.report(
                 ISSUE,
-                node,
                 context.getLocation(node),
                 rule.getExplanation()
         );

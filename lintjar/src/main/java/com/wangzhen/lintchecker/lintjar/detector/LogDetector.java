@@ -10,8 +10,8 @@ import com.android.tools.lint.detector.api.Severity;
 import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiMethodCallExpression;
+import com.wangzhen.lintchecker.lintjar.inter.Rule;
 import com.wangzhen.lintchecker.lintjar.rule.LogRule;
-import com.wangzhen.lintchecker.lintjar.rule.Rule;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -23,7 +23,7 @@ import java.util.List;
  * Created by wangzhen on 2018/4/15.
  */
 public class LogDetector extends Detector implements Detector.JavaPsiScanner {
-    private static Rule rule = new LogRule();
+    private static final Rule rule = new LogRule();
     public static final Issue ISSUE = Issue.create(
             rule.getId(),
             rule.getBriefDescription(),
@@ -43,11 +43,8 @@ public class LogDetector extends Detector implements Detector.JavaPsiScanner {
     @Override
     public void visitMethod(JavaContext context, JavaElementVisitor
             visitor, PsiMethodCallExpression call, PsiMethod method) {
-        System.out.println("visitMethod");
         if (context.getEvaluator().isMemberInClass(method, rule.getFullPath())) {
-            System.out.println("isMemberInClass");
             context.report(ISSUE, call, context.getLocation(call.getMethodExpression()), rule.getExplanation());
-            System.out.println("report");
         }
     }
 }

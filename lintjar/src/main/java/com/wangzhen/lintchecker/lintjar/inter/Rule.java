@@ -1,4 +1,4 @@
-package com.wangzhen.lintchecker.lintjar.rule;
+package com.wangzhen.lintchecker.lintjar.inter;
 
 /**
  * Issue获取信息接口

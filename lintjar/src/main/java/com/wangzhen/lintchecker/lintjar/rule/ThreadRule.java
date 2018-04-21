@@ -1,5 +1,7 @@
 package com.wangzhen.lintchecker.lintjar.rule;
 
+import com.wangzhen.lintchecker.lintjar.inter.Rule;
+
 /**
  * Thread提示信息
  * Created by wangzhen on 2018/4/15.

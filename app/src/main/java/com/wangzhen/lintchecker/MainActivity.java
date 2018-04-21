@@ -1,8 +1,10 @@
 package com.wangzhen.lintchecker;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,5 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }).start();
+
+        Message message = new Message();
     }
 }
