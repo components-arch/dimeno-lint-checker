@@ -10,7 +10,7 @@ import com.wangzhen.lintchecker.lintjar.inter.Rule;
 public class ThreadRule implements Rule {
     @Override
     public String getId() {
-        return "ThreadUsage";
+        return ThreadRule.class.getSimpleName();
     }
 
     @Override

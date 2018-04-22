@@ -9,7 +9,7 @@ import com.wangzhen.lintchecker.lintjar.inter.Rule;
 public class MessageRule implements Rule {
     @Override
     public String getId() {
-        return "MessageUsage";
+        return MessageRule.class.getSimpleName();
     }
 
     @Override

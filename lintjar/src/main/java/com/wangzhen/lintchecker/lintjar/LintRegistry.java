@@ -2,6 +2,7 @@ package com.wangzhen.lintchecker.lintjar;
 
 import com.android.tools.lint.client.api.IssueRegistry;
 import com.android.tools.lint.detector.api.Issue;
+import com.wangzhen.lintchecker.lintjar.detector.LayoutNameDetector;
 import com.wangzhen.lintchecker.lintjar.detector.LogDetector;
 import com.wangzhen.lintchecker.lintjar.detector.MessageDetector;
 import com.wangzhen.lintchecker.lintjar.detector.ThreadDetector;
@@ -21,7 +22,8 @@ public class LintRegistry extends IssueRegistry {
         return Arrays.asList(
                 LogDetector.ISSUE,
                 ThreadDetector.ISSUE,
-                MessageDetector.ISSUE
+                MessageDetector.ISSUE,
+                LayoutNameDetector.ISSUE
         );
     }
 }

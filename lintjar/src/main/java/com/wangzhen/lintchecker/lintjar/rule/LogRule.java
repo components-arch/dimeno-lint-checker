@@ -9,7 +9,7 @@ import com.wangzhen.lintchecker.lintjar.inter.Rule;
 public class LogRule implements Rule {
     @Override
     public String getId() {
-        return "LogUsage";
+        return LogRule.class.getSimpleName();
     }
 
     @Override
