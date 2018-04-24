@@ -1,6 +1,1 @@
 /build/*
-!/build/intermediates
-/build/intermediates/*
-!/build/intermediates/lint
-/build/intermediates/lint/*
-!/build/intermediates/lint/lint.jar
