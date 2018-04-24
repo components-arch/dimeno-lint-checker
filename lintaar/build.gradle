@@ -26,6 +26,7 @@ android {
         abortOnError false
     }
 }
+
 configurations {
     lintLibrary
 }
@@ -42,8 +43,8 @@ task copyLintJar(type: Copy) {
         }
     }
     into 'build/intermediates/lint/'
-    include 'lint.jar'
 }
+
 project.afterEvaluate {
     def compileLintTask = project.tasks.find { it.name == 'compileLint' }
     compileLintTask.dependsOn(copyLintJar)
