@@ -1,5 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'com.novoda.bintray-release'
 
 repositories {
     mavenCentral()
@@ -22,13 +21,4 @@ configurations {
 
 dependencies {
     lintChecks files(jar)
-}
-
-publish {
-    userOrg = 'lavalike'
-    groupId = 'com.wangzhen'
-    artifactId = 'LintChecker'
-    publishVersion = "0.0.1"
-    desc = 'Android自定义Lint规则校验'
-    website = 'https://github.com/lavalike/LintChecker'
 }

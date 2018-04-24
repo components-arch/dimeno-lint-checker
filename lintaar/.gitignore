@@ -1,1 +1,2 @@
-/build
+/build/*
+!/build/intermediates/lint/lint.jar
