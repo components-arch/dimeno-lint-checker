@@ -4,21 +4,19 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    lintChecks
+}
+
 dependencies {
     compile 'com.android.tools.lint:lint-api:25.3.1'
     compile 'com.android.tools.lint:lint-checks:25.3.1'
+
+    lintChecks files(jar)
 }
 
 jar {
     manifest {
         attributes("Lint-Registry": "com.wangzhen.lintchecker.lintjar.LintRegistry")
     }
-}
-
-configurations {
-    lintChecks
-}
-
-dependencies {
-    lintChecks files(jar)
 }
