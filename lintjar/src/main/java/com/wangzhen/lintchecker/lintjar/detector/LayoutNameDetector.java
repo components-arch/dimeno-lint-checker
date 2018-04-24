@@ -46,24 +46,12 @@ public class LayoutNameDetector extends Detector implements Detector.JavaPsiScan
         if (methodName.equals(name)) {
             PsiParameter parameter = method.getParameterList().getParameters()[0];
             if (Objects.equals("int", parameter.getType().getPresentableText())) {
-                context.report(
-                        ISSUE,
-                        call,
-                        context.getLocation(call),
-                        parameter.getText()
-                );
-
-//                String s = parameter.toString();
-//                String layoutName = s.substring(s.lastIndexOf("."));
-//                if(!layoutName.startsWith("activity_")
-//                        ||!layoutName.startsWith("fragment_")){
-//                    context.report(
-//                            ISSUE,
-//                            call,
-//                            context.getLocation(call),
-//                            rule.getExplanation()
-//                    );
-//                }
+//                context.report(
+//                        ISSUE,
+//                        call,
+//                        context.getLocation(call),
+//                        parameter.getText()
+//                );
             }
         }
     }
