@@ -22,7 +22,7 @@ import java.util.Objects;
  * Activity和Fragment布局命名检测
  * Created by wangzhen on 2018/4/22.
  */
-public class LayoutNameDetector extends Detector implements Detector.JavaPsiScanner {
+public class LayoutNameDetector extends Detector implements Detector.UastScanner {
     private String methodName = "setContentView";
     private static final Rule rule = new LayoutNameRule();
     public static Issue ISSUE = Issue.create(

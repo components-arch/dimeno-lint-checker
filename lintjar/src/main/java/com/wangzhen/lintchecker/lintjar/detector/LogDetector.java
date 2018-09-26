@@ -22,7 +22,7 @@ import java.util.List;
  * Log检测
  * Created by wangzhen on 2018/4/15.
  */
-public class LogDetector extends Detector implements Detector.JavaPsiScanner {
+public class LogDetector extends Detector implements Detector.UastScanner {
     private static final Rule rule = new LogRule();
     public static final Issue ISSUE = Issue.create(
             rule.getId(),

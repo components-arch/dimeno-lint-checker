@@ -20,7 +20,7 @@ import java.util.List;
  * Message检测
  * Created by wangzhen on 2018/4/21.
  */
-public class MessageDetector extends Detector implements Detector.JavaPsiScanner {
+public class MessageDetector extends Detector implements Detector.UastScanner {
     private static final Rule rule=new MessageRule();
     public static Issue ISSUE=Issue.create(
             rule.getId(),
