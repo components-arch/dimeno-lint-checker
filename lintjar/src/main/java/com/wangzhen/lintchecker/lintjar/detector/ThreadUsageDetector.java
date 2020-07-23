@@ -20,7 +20,7 @@ import java.util.List;
  * 线程检测
  * Created by wangzhen on 2018/4/15.
  */
-public class ThreadDetector extends Detector implements Detector.UastScanner {
+public class ThreadUsageDetector extends Detector implements Detector.UastScanner {
     private static final Rule rule = new ThreadRule();
     public static final Issue ISSUE = Issue.create(
             rule.getId(),
@@ -29,7 +29,7 @@ public class ThreadDetector extends Detector implements Detector.UastScanner {
             Category.PERFORMANCE,
             5,
             Severity.ERROR,
-            new Implementation(ThreadDetector.class, Scope.JAVA_FILE_SCOPE)
+            new Implementation(ThreadUsageDetector.class, Scope.JAVA_FILE_SCOPE)
     );
 
     @Override
