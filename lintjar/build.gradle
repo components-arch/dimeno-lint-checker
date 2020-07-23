@@ -10,8 +10,8 @@ configurations {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.tools.lint:lint-api:26.1.0'
-    implementation 'com.android.tools.lint:lint-checks:26.1.0'
+    implementation 'com.android.tools.lint:lint-api:27.0.1'
+    implementation 'com.android.tools.lint:lint-checks:27.0.1'
 
     lintChecks files(jar)
 }
