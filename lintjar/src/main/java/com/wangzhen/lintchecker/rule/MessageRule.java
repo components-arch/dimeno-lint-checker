@@ -1,6 +1,6 @@
-package com.wangzhen.lintchecker.lintjar.rule;
+package com.wangzhen.lintchecker.rule;
 
-import com.wangzhen.lintchecker.lintjar.inter.Rule;
+import com.wangzhen.lintchecker.callback.Rule;
 
 /**
  * Message提示信息
@@ -19,7 +19,7 @@ public class MessageRule implements Rule {
 
     @Override
     public String getExplanation() {
-        return "请勿直接new Message()，尽量使用Message.obtain()";
+        return "尽量使用Message.obtain()";
     }
 
     @Override

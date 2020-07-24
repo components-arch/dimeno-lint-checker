@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.wangzhen.lintchecker"
+        applicationId "com.wangzhen.lintchecker.sample"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1

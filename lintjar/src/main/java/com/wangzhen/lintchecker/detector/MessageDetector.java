@@ -1,4 +1,4 @@
-package com.wangzhen.lintchecker.lintjar.detector;
+package com.wangzhen.lintchecker.detector;
 
 import com.android.tools.lint.detector.api.Category;
 import com.android.tools.lint.detector.api.Detector;
@@ -7,28 +7,30 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
+import com.android.tools.lint.detector.api.SourceCodeScanner;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiNewExpression;
-import com.wangzhen.lintchecker.lintjar.inter.Rule;
-import com.wangzhen.lintchecker.lintjar.rule.MessageRule;
+import com.wangzhen.lintchecker.callback.Rule;
+import com.wangzhen.lintchecker.rule.MessageRule;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.uast.UCallExpression;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Message检测
+ * detect message usage
  * Created by wangzhen on 2018/4/21.
  */
-public class MessageDetector extends Detector implements Detector.UastScanner {
-    private static final Rule rule=new MessageRule();
-    public static Issue ISSUE=Issue.create(
+public class MessageDetector extends Detector implements SourceCodeScanner {
+    private static final Rule rule = new MessageRule();
+    public static Issue ISSUE = Issue.create(
             rule.getId(),
             rule.getBriefDescription(),
             rule.getExplanation(),
-            Category.PERFORMANCE,
+            Category.MESSAGES,
             5,
-            Severity.ERROR,
+            Severity.WARNING,
             new Implementation(MessageDetector.class, Scope.JAVA_FILE_SCOPE)
     );
 
@@ -38,11 +40,7 @@ public class MessageDetector extends Detector implements Detector.UastScanner {
     }
 
     @Override
-    public void visitConstructor(JavaContext context, JavaElementVisitor visitor, PsiNewExpression node, PsiMethod constructor) {
-        context.report(
-                ISSUE,
-                context.getLocation(node),
-                rule.getExplanation()
-        );
+    public void visitConstructor(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod constructor) {
+        context.report(ISSUE, node, context.getLocation(node), rule.getExplanation());
     }
 }

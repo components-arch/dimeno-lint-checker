@@ -1,4 +1,4 @@
-package com.wangzhen.lintchecker.lintjar.detector;
+package com.wangzhen.lintchecker.detector;
 
 import com.android.tools.lint.detector.api.Category;
 import com.android.tools.lint.detector.api.Detector;
@@ -11,8 +11,8 @@ import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiParameter;
-import com.wangzhen.lintchecker.lintjar.inter.Rule;
-import com.wangzhen.lintchecker.lintjar.rule.LayoutNameRule;
+import com.wangzhen.lintchecker.callback.Rule;
+import com.wangzhen.lintchecker.rule.LayoutNameRule;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +31,7 @@ public class LayoutNameDetector extends Detector implements Detector.UastScanner
             rule.getExplanation(),
             Category.MESSAGES,
             5,
-            Severity.ERROR,
+            Severity.WARNING,
             new Implementation(LayoutNameDetector.class, Scope.JAVA_FILE_SCOPE)
     );
 

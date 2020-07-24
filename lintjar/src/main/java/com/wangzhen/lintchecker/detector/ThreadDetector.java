@@ -1,4 +1,4 @@
-package com.wangzhen.lintchecker.lintjar.detector;
+package com.wangzhen.lintchecker.detector;
 
 import com.android.tools.lint.detector.api.Category;
 import com.android.tools.lint.detector.api.Detector;
@@ -9,40 +9,38 @@ import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
 import com.android.tools.lint.detector.api.SourceCodeScanner;
 import com.intellij.psi.PsiMethod;
-import com.wangzhen.lintchecker.lintjar.inter.Rule;
-import com.wangzhen.lintchecker.lintjar.rule.LogRule;
+import com.wangzhen.lintchecker.callback.Rule;
+import com.wangzhen.lintchecker.rule.ThreadRule;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.uast.UCallExpression;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
- * detect log usage
+ * detect thread usage
  * Created by wangzhen on 2018/4/15.
  */
-public class LogDetector extends Detector implements SourceCodeScanner {
-    private static final Rule rule = new LogRule();
+public class ThreadDetector extends Detector implements SourceCodeScanner {
+    private static final Rule rule = new ThreadRule();
     public static final Issue ISSUE = Issue.create(
             rule.getId(),
             rule.getBriefDescription(),
             rule.getExplanation(),
             Category.MESSAGES,
             5,
-            Severity.ERROR,
-            new Implementation(LogDetector.class, Scope.JAVA_FILE_SCOPE)
+            Severity.WARNING,
+            new Implementation(ThreadDetector.class, Scope.JAVA_FILE_SCOPE)
     );
 
-    @Nullable
     @Override
-    public List<String> getApplicableMethodNames() {
-        return Arrays.asList("v", "d", "i", "w", "e");
+    public List<String> getApplicableConstructorTypes() {
+        return Collections.singletonList(rule.getFullPath());
     }
 
     @Override
-    public void visitMethodCall(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod method) {
+    public void visitConstructor(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod constructor) {
         context.report(ISSUE, node, context.getLocation(node), rule.getExplanation());
     }
 }

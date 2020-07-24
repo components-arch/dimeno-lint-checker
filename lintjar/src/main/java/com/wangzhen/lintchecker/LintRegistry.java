@@ -1,11 +1,11 @@
-package com.wangzhen.lintchecker.lintjar;
+package com.wangzhen.lintchecker;
 
 import com.android.tools.lint.client.api.IssueRegistry;
 import com.android.tools.lint.detector.api.Issue;
-import com.wangzhen.lintchecker.lintjar.detector.LayoutNameDetector;
-import com.wangzhen.lintchecker.lintjar.detector.LogDetector;
-import com.wangzhen.lintchecker.lintjar.detector.MessageDetector;
-import com.wangzhen.lintchecker.lintjar.detector.ThreadUsageDetector;
+import com.wangzhen.lintchecker.detector.LayoutNameDetector;
+import com.wangzhen.lintchecker.detector.LogDetector;
+import com.wangzhen.lintchecker.detector.MessageDetector;
+import com.wangzhen.lintchecker.detector.ThreadDetector;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +21,7 @@ public class LintRegistry extends IssueRegistry {
     public List<Issue> getIssues() {
         return Arrays.asList(
                 LogDetector.ISSUE,
-                ThreadUsageDetector.ISSUE,
+                ThreadDetector.ISSUE,
                 MessageDetector.ISSUE,
                 LayoutNameDetector.ISSUE
         );

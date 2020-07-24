@@ -1,4 +1,4 @@
-package com.wangzhen.lintchecker;
+package com.wangzhen.lintchecker.sample;
 
 import android.os.Bundle;
 import android.os.Message;

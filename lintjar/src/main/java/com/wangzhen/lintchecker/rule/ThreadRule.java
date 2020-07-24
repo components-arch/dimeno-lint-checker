@@ -1,6 +1,6 @@
-package com.wangzhen.lintchecker.lintjar.rule;
+package com.wangzhen.lintchecker.rule;
 
-import com.wangzhen.lintchecker.lintjar.inter.Rule;
+import com.wangzhen.lintchecker.callback.Rule;
 
 /**
  * Thread提示信息
@@ -20,7 +20,7 @@ public class ThreadRule implements Rule {
 
     @Override
     public String getExplanation() {
-        return "请勿直接调用new Thread()，建议使用AsyncTask或统一的线程管理工具类";
+        return "建议使用AsyncTask或统一的线程管理工具类";
     }
 
     @Override

@@ -1,6 +1,6 @@
-package com.wangzhen.lintchecker.lintjar.rule;
+package com.wangzhen.lintchecker.rule;
 
-import com.wangzhen.lintchecker.lintjar.inter.Rule;
+import com.wangzhen.lintchecker.callback.Rule;
 
 /**
  * Log提示信息
@@ -19,7 +19,7 @@ public class LogRule implements Rule {
 
     @Override
     public String getExplanation() {
-        return "请使用封装后的Log工具类，勿直接调用android.util.Log";
+        return "请使用封装后的Log工具类";
     }
 
     @Override

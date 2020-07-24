@@ -1,6 +1,6 @@
-package com.wangzhen.lintchecker.lintjar.rule;
+package com.wangzhen.lintchecker.rule;
 
-import com.wangzhen.lintchecker.lintjar.inter.Rule;
+import com.wangzhen.lintchecker.callback.Rule;
 
 /**
  * 布局命名提示信息

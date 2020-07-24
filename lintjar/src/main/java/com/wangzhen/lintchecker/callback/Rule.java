@@ -1,4 +1,4 @@
-package com.wangzhen.lintchecker.lintjar.inter;
+package com.wangzhen.lintchecker.callback;
 
 /**
  * Issue获取信息接口
