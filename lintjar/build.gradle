@@ -9,15 +9,14 @@ configurations {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.tools.lint:lint-api:27.0.1'
-    implementation 'com.android.tools.lint:lint-checks:27.0.1'
+    compileOnly 'com.android.tools.lint:lint-api:27.0.1'
+    compileOnly 'com.android.tools.lint:lint-checks:27.0.1'
 
     lintChecks files(jar)
 }
 
 jar {
     manifest {
-        attributes("Lint-Registry": "com.wangzhen.lintchecker.lintjar.LintRegistry")
+        attributes("Lint-Registry-v2": "com.wangzhen.lintchecker.lintjar.LintRegistry")
     }
 }

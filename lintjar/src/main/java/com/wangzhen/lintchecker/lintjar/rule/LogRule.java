@@ -19,7 +19,7 @@ public class LogRule implements Rule {
 
     @Override
     public String getExplanation() {
-        return "请勿直接调用android.util.Log，应该使用封装工具类，防止正式包打印Log.";
+        return "AndroidStudio 4.0+ 请勿直接调用android.util.Log，应该使用封装工具类，防止正式包打印Log.";
     }
 
     @Override
