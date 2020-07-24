@@ -14,12 +14,12 @@ public class LogRule implements Rule {
 
     @Override
     public String getBriefDescription() {
-        return "避免调用android.util.Log";
+        return "Log使用不规范";
     }
 
     @Override
     public String getExplanation() {
-        return "AndroidStudio 4.0+ 请勿直接调用android.util.Log，应该使用封装工具类，防止正式包打印Log.";
+        return "请使用封装后的Log工具类，勿直接调用android.util.Log";
     }
 
     @Override

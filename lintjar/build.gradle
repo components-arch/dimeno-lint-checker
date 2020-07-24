@@ -4,15 +4,9 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    lintChecks
-}
-
 dependencies {
     compileOnly 'com.android.tools.lint:lint-api:27.0.1'
     compileOnly 'com.android.tools.lint:lint-checks:27.0.1'
-
-    lintChecks files(jar)
 }
 
 jar {

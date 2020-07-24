@@ -17,13 +17,10 @@ android {
         }
     }
     lintOptions {
-        textReport true
-        textOutput 'stdout'
         abortOnError false
     }
 }
 
-// 配置assemble任务依赖lint，编译时就会执行Lint检查
 android.applicationVariants.all { variant ->
     variant.outputs.each { output ->
         def lintTask = tasks["lint${variant.name.capitalize()}"]
@@ -34,5 +31,5 @@ android.applicationVariants.all { variant ->
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    lintChecks project(":lintjar")
+    implementation project(path: ':lintaar')
 }

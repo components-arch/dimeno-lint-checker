@@ -1,16 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
-def vCode = 1
-def vName = '0.0.1'
-
 android {
     compileSdkVersion 29
     defaultConfig {
         minSdkVersion 1
         targetSdkVersion 29
-        versionCode vCode
-        versionName vName
+        versionCode 1
+        versionName '1.0'
     }
 
     buildTypes {
@@ -21,39 +18,38 @@ android {
     }
 
     lintOptions {
-        abortOnError true
+        abortOnError false
     }
 }
 
-configurations {
-    lintLibrary
+android.libraryVariants.all { variant ->
+    variant.outputs.each { output ->
+        def lintTask = tasks["lint${variant.name.capitalize()}"]
+        output.assemble.dependsOn lintTask
+    }
 }
 
 dependencies {
-    lintLibrary project(path: ":lintjar", configuration: "lintChecks")
-//    lintChecks project(':lintjar')
-}
-
-task copyLintJar(type: Copy) {
-    from(configurations.lintLibrary) {
-        rename {
-            String fileName ->
-                'lint.jar'
-        }
-    }
-    into 'build/intermediates/lint/'
-}
-
-project.afterEvaluate {
-    def compileLintTask = project.tasks.find { it.name == 'compileLint' }
-    compileLintTask.dependsOn(copyLintJar)
+    /**
+     * 使用 Android Gradle 插件 3.4.0 及更高版本时，
+     * 此依赖项配置不再将 lint 检查打包在 Android 库项目中。
+     * 如需将 lint 检查依赖项包含在 AAR 库中，请使用lintPublish配置
+     */
+    lintChecks project(':lintjar')
+    /**
+     * 在 Android 库项目中使用此配置可以添加您希望 Gradle 编译成 lint.jar 文件
+     * 并打包在 AAR 中的 lint 检查。这会使得使用 AAR 的项目也应用这些 lint 检查。
+     * 如果您之前使用 lintChecks 依赖项配置将 lint 检查包含在已发布的 AAR 中，
+     * 则需要迁移这些依赖项以改用 lintPublish 配置
+     */
+    lintPublish project(':lintjar')
 }
 
 publish {
     userOrg = 'lavalike'
     groupId = 'com.wangzhen'
-    artifactId = 'LintChecker'
-    publishVersion = vName
-    desc = 'Android自定义Lint规则校验'
+    artifactId = 'lint-checker'
+    publishVersion = '0.0.1'
+    desc = 'Android编码lint规范'
     website = 'https://github.com/lavalike/LintChecker'
 }
