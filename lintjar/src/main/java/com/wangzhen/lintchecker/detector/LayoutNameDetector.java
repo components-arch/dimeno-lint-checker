@@ -7,23 +7,23 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
+import com.android.tools.lint.detector.api.SourceCodeScanner;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiParameter;
 import com.wangzhen.lintchecker.callback.Rule;
 import com.wangzhen.lintchecker.rule.LayoutNameRule;
 
-import java.util.Arrays;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.uast.UCallExpression;
+import org.jetbrains.uast.UExpression;
+
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Activity和Fragment布局命名检测
  * Created by wangzhen on 2018/4/22.
  */
-public class LayoutNameDetector extends Detector implements Detector.UastScanner {
-    private String methodName = "setContentView";
+public class LayoutNameDetector extends Detector implements SourceCodeScanner {
     private static final Rule rule = new LayoutNameRule();
     public static Issue ISSUE = Issue.create(
             rule.getId(),
@@ -37,21 +37,20 @@ public class LayoutNameDetector extends Detector implements Detector.UastScanner
 
     @Override
     public List<String> getApplicableMethodNames() {
-        return Arrays.asList(methodName);
+        return Collections.singletonList("setContentView");
     }
 
     @Override
-    public void visitMethod(JavaContext context, JavaElementVisitor visitor, PsiMethodCallExpression call, PsiMethod method) {
-        String name = method.getName();
-        if (methodName.equals(name)) {
-            PsiParameter parameter = method.getParameterList().getParameters()[0];
-            if (Objects.equals("int", parameter.getType().getPresentableText())) {
-//                context.report(
-//                        ISSUE,
-//                        call,
-//                        context.getLocation(call),
-//                        parameter.getText()
-//                );
+    public void visitMethodCall(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod method) {
+        for (UExpression argument : node.getValueArguments()) {
+            if (argument.getExpressionType() != null) {
+                String type = argument.getExpressionType().getCanonicalText();
+                if ("int".equals(type)) {
+                    String layoutRes = argument.toString().replace("R.layout.", "");
+                    if (!layoutRes.startsWith("activity_")) {
+                        context.report(ISSUE, node, context.getLocation(node), "建议Activity布局以\"activity_\"开头");
+                    }
+                }
             }
         }
     }
