@@ -1,2 +1,2 @@
 # LintChecker
-Android自定义Lint规则校验
+Android编码规范lint校验
