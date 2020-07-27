@@ -20,10 +20,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Activity和Fragment布局命名检测
+ * detect activity layout name usage.
  * Created by wangzhen on 2018/4/22.
  */
-public class LayoutNameDetector extends Detector implements SourceCodeScanner {
+public class ActivityLayoutNameDetector extends Detector implements SourceCodeScanner {
     private static final Rule rule = new LayoutNameRule();
     public static Issue ISSUE = Issue.create(
             rule.getId(),
@@ -32,7 +32,7 @@ public class LayoutNameDetector extends Detector implements SourceCodeScanner {
             Category.MESSAGES,
             5,
             Severity.WARNING,
-            new Implementation(LayoutNameDetector.class, Scope.JAVA_FILE_SCOPE)
+            new Implementation(ActivityLayoutNameDetector.class, Scope.JAVA_FILE_SCOPE)
     );
 
     @Override
@@ -42,13 +42,16 @@ public class LayoutNameDetector extends Detector implements SourceCodeScanner {
 
     @Override
     public void visitMethodCall(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod method) {
-        for (UExpression argument : node.getValueArguments()) {
-            if (argument.getExpressionType() != null) {
-                String type = argument.getExpressionType().getCanonicalText();
-                if ("int".equals(type)) {
-                    String layoutRes = argument.toString().replace("R.layout.", "");
-                    if (!layoutRes.startsWith("activity_")) {
-                        context.report(ISSUE, node, context.getLocation(node), "建议Activity布局以\"activity_\"开头");
+        boolean memberInActivity = context.getEvaluator().isMemberInClass(method, "androidx.appcompat.app.AppCompatActivity");
+        if (memberInActivity) {
+            for (UExpression argument : node.getValueArguments()) {
+                if (argument.getExpressionType() != null) {
+                    String type = argument.getExpressionType().getCanonicalText();
+                    if ("int".equals(type)) {
+                        String layoutRes = argument.toString().replace("R.layout.", "");
+                        if (!layoutRes.startsWith("activity_")) {
+                            context.report(ISSUE, node, context.getLocation(node), "建议Activity布局以\"activity_\"开头");
+                        }
                     }
                 }
             }
