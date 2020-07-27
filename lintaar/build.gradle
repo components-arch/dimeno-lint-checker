@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 29
@@ -45,11 +45,11 @@ dependencies {
     lintPublish project(':lintjar')
 }
 
-publish {
-    userOrg = 'lavalike'
-    groupId = 'com.wangzhen'
-    artifactId = 'lint-checker'
-    publishVersion = '0.0.1'
-    desc = 'Android编码lint规范'
-    website = 'https://github.com/lavalike/LintChecker'
-}
+//publish {
+//    userOrg = 'lavalike'
+//    groupId = 'com.wangzhen'
+//    artifactId = 'lint-checker'
+//    publishVersion = '0.0.1'
+//    desc = 'Android编码lint规范'
+//    website = 'https://github.com/lavalike/LintChecker'
+//}
