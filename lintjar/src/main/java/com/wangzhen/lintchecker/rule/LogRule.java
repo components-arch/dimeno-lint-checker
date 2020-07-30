@@ -19,11 +19,6 @@ public class LogRule implements Rule {
 
     @Override
     public String getExplanation() {
-        return "请使用封装后的Log工具类";
-    }
-
-    @Override
-    public String getFullPath() {
-        return "android.util.Log";
+        return "建议使用封装后的Log工具类";
     }
 }

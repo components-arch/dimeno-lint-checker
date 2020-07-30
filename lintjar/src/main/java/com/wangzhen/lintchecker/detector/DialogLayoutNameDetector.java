@@ -10,7 +10,7 @@ import com.android.tools.lint.detector.api.Severity;
 import com.android.tools.lint.detector.api.SourceCodeScanner;
 import com.intellij.psi.PsiMethod;
 import com.wangzhen.lintchecker.callback.Rule;
-import com.wangzhen.lintchecker.rule.ActivityLayoutNameRule;
+import com.wangzhen.lintchecker.rule.DialogLayoutNameRule;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.uast.UCallExpression;
@@ -20,11 +20,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * detect activity layout name usage.
- * Created by wangzhen on 2018/4/22.
+ * detect dialog layout name usage.
+ * Created by wangzhen on 2020/7/30.
  */
-public class ActivityLayoutNameDetector extends Detector implements SourceCodeScanner {
-    private static final Rule rule = new ActivityLayoutNameRule();
+public class DialogLayoutNameDetector extends Detector implements SourceCodeScanner {
+    private static final Rule rule = new DialogLayoutNameRule();
     public static Issue ISSUE = Issue.create(
             rule.getId(),
             rule.getBriefDescription(),
@@ -32,7 +32,7 @@ public class ActivityLayoutNameDetector extends Detector implements SourceCodeSc
             Category.MESSAGES,
             5,
             Severity.WARNING,
-            new Implementation(ActivityLayoutNameDetector.class, Scope.JAVA_FILE_SCOPE)
+            new Implementation(DialogLayoutNameDetector.class, Scope.JAVA_FILE_SCOPE)
     );
 
     @Override
@@ -42,15 +42,15 @@ public class ActivityLayoutNameDetector extends Detector implements SourceCodeSc
 
     @Override
     public void visitMethodCall(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod method) {
-        boolean isMemberInClass = context.getEvaluator().isMemberInClass(method, "android.app.Activity");
-        boolean isMemberInSubClassOf = context.getEvaluator().isMemberInSubClassOf(method, "android.app.Activity", true);
+        boolean isMemberInClass = context.getEvaluator().isMemberInClass(method, "android.app.Dialog");
+        boolean isMemberInSubClassOf = context.getEvaluator().isMemberInSubClassOf(method, "android.app.Dialog", true);
         if (isMemberInClass || isMemberInSubClassOf) {
             for (UExpression argument : node.getValueArguments()) {
                 if (argument.getExpressionType() != null) {
                     String type = argument.getExpressionType().getCanonicalText();
                     if ("int".equals(type)) {
                         String layoutRes = argument.toString().replace("R.layout.", "");
-                        if (!layoutRes.startsWith("activity_")) {
+                        if (!layoutRes.startsWith("dialog_")) {
                             context.report(ISSUE, node, context.getLocation(node), rule.getExplanation());
                         }
                     }

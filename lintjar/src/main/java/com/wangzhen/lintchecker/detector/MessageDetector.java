@@ -36,7 +36,7 @@ public class MessageDetector extends Detector implements SourceCodeScanner {
 
     @Override
     public List<String> getApplicableConstructorTypes() {
-        return Collections.singletonList(rule.getFullPath());
+        return Collections.singletonList("android.os.Message");
     }
 
     @Override

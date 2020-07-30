@@ -3,23 +3,22 @@ package com.wangzhen.lintchecker.rule;
 import com.wangzhen.lintchecker.callback.Rule;
 
 /**
- * Thread提示信息
- * Created by wangzhen on 2018/4/15.
+ * DialogLayoutNameRule
+ * Created by wangzhen on 2020/7/30.
  */
-
-public class ThreadRule implements Rule {
+public class DialogLayoutNameRule implements Rule {
     @Override
     public String getId() {
-        return ThreadRule.class.getSimpleName();
+        return DialogLayoutNameRule.class.getName();
     }
 
     @Override
     public String getBriefDescription() {
-        return "避免自己创建Thread";
+        return "Dialog命名规范";
     }
 
     @Override
     public String getExplanation() {
-        return "建议使用AsyncTask或统一的线程管理工具类";
+        return "Dialog布局建议以\"dialog_\"开头";
     }
 }

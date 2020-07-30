@@ -10,6 +10,4 @@ public interface Rule {
     String getBriefDescription();
 
     String getExplanation();
-
-    String getFullPath();
 }

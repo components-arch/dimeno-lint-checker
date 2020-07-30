@@ -19,11 +19,6 @@ public class MessageRule implements Rule {
 
     @Override
     public String getExplanation() {
-        return "尽量使用Message.obtain()";
-    }
-
-    @Override
-    public String getFullPath() {
-        return "android.os.Message";
+        return "建议使用Message.obtain()";
     }
 }
