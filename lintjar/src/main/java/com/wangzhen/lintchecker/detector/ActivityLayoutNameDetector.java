@@ -42,8 +42,9 @@ public class ActivityLayoutNameDetector extends Detector implements SourceCodeSc
 
     @Override
     public void visitMethodCall(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod method) {
-        boolean memberInActivity = context.getEvaluator().isMemberInClass(method, "androidx.appcompat.app.AppCompatActivity");
-        if (memberInActivity) {
+        boolean isMemberInClass = context.getEvaluator().isMemberInClass(method, "android.app.Activity");
+        boolean isMemberInSubClassOf = context.getEvaluator().isMemberInSubClassOf(method, "android.app.Activity", true);
+        if (isMemberInClass || isMemberInSubClassOf) {
             for (UExpression argument : node.getValueArguments()) {
                 if (argument.getExpressionType() != null) {
                     String type = argument.getExpressionType().getCanonicalText();
