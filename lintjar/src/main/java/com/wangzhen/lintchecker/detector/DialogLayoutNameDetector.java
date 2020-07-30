@@ -13,9 +13,11 @@ import com.wangzhen.lintchecker.callback.Rule;
 import com.wangzhen.lintchecker.rule.DialogLayoutNameRule;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,6 +37,12 @@ public class DialogLayoutNameDetector extends Detector implements SourceCodeScan
             new Implementation(DialogLayoutNameDetector.class, Scope.JAVA_FILE_SCOPE)
     );
 
+    @Nullable
+    @Override
+    public List<String> applicableSuperClasses() {
+        return Collections.singletonList("android.app.Dialog");
+    }
+
     @Override
     public List<String> getApplicableMethodNames() {
         return Collections.singletonList("setContentView");
@@ -42,17 +50,13 @@ public class DialogLayoutNameDetector extends Detector implements SourceCodeScan
 
     @Override
     public void visitMethodCall(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod method) {
-        boolean isMemberInClass = context.getEvaluator().isMemberInClass(method, "android.app.Dialog");
-        boolean isMemberInSubClassOf = context.getEvaluator().isMemberInSubClassOf(method, "android.app.Dialog", true);
-        if (isMemberInClass || isMemberInSubClassOf) {
-            for (UExpression argument : node.getValueArguments()) {
-                if (argument.getExpressionType() != null) {
-                    String type = argument.getExpressionType().getCanonicalText();
-                    if ("int".equals(type)) {
-                        String layoutRes = argument.toString().replace("R.layout.", "");
-                        if (!layoutRes.startsWith("dialog_")) {
-                            context.report(ISSUE, node, context.getLocation(node), rule.getExplanation());
-                        }
+        for (UExpression argument : node.getValueArguments()) {
+            if (argument.getExpressionType() != null) {
+                String type = argument.getExpressionType().getCanonicalText();
+                if ("int".equals(type)) {
+                    String layoutRes = argument.toString().replace("R.layout.", "");
+                    if (!layoutRes.startsWith("dialog_")) {
+                        context.report(ISSUE, node, context.getLocation(node), rule.getExplanation());
                     }
                 }
             }

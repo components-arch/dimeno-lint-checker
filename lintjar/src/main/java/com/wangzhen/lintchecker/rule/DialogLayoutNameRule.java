@@ -14,7 +14,7 @@ public class DialogLayoutNameRule implements Rule {
 
     @Override
     public String getBriefDescription() {
-        return "Dialog命名规范";
+        return "Dialog布局命名不规范";
     }
 
     @Override
