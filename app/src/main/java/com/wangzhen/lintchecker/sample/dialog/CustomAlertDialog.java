@@ -1,6 +1,9 @@
-package com.wangzhen.lintchecker.sample;
+package com.wangzhen.lintchecker.sample.dialog;
 
 import android.content.Context;
+
+import com.wangzhen.lintchecker.sample.R;
+import com.wangzhen.lintchecker.sample.base.BaseDialog;
 
 /**
  * CustomAlertDialog
@@ -9,6 +12,6 @@ import android.content.Context;
 public class CustomAlertDialog extends BaseDialog {
     protected CustomAlertDialog(Context context) {
         super(context);
-        setContentView(R.layout.support_simple_spinner_dropdown_item);
+        setContentView(R.layout.dialog_custom_layout);
     }
 }

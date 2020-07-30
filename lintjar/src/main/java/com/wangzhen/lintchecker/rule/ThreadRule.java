@@ -15,7 +15,7 @@ public class ThreadRule implements Rule {
 
     @Override
     public String getBriefDescription() {
-        return "避免自己创建Thread";
+        return "Thread使用不规范";
     }
 
     @Override

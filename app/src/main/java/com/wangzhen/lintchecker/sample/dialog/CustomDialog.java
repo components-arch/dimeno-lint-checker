@@ -1,9 +1,11 @@
-package com.wangzhen.lintchecker.sample;
+package com.wangzhen.lintchecker.sample.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+
+import com.wangzhen.lintchecker.sample.R;
 
 /**
  * CustomDialog

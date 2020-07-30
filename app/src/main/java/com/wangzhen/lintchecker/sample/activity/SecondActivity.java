@@ -1,7 +1,9 @@
-package com.wangzhen.lintchecker.sample;
+package com.wangzhen.lintchecker.sample.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.wangzhen.lintchecker.sample.R;
 
 public class SecondActivity extends Activity {
 

@@ -50,13 +50,17 @@ public class DialogLayoutNameDetector extends Detector implements SourceCodeScan
 
     @Override
     public void visitMethodCall(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod method) {
-        for (UExpression argument : node.getValueArguments()) {
-            if (argument.getExpressionType() != null) {
-                String type = argument.getExpressionType().getCanonicalText();
-                if ("int".equals(type)) {
-                    String layoutRes = argument.toString().replace("R.layout.", "");
-                    if (!layoutRes.startsWith("dialog_")) {
-                        context.report(ISSUE, node, context.getLocation(node), rule.getExplanation());
+        boolean isMemberInClass = context.getEvaluator().isMemberInClass(method, "android.app.Dialog");
+        boolean isMemberInSubClassOf = context.getEvaluator().isMemberInSubClassOf(method, "android.app.Dialog", true);
+        if (isMemberInClass || isMemberInSubClassOf) {
+            for (UExpression argument : node.getValueArguments()) {
+                if (argument.getExpressionType() != null) {
+                    String type = argument.getExpressionType().getCanonicalText();
+                    if ("int".equals(type)) {
+                        String layoutRes = argument.toString().replace("R.layout.", "");
+                        if (!layoutRes.startsWith("dialog_")) {
+                            context.report(ISSUE, node, context.getLocation(node), rule.getExplanation());
+                        }
                     }
                 }
             }

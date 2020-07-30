@@ -3,7 +3,7 @@ package com.wangzhen.lintchecker.rule;
 import com.wangzhen.lintchecker.callback.Rule;
 
 /**
- * activity name rule
+ * activity layout name rule
  * Created by wangzhen on 2018/4/22.
  */
 public class ActivityLayoutNameRule implements Rule {
@@ -14,7 +14,7 @@ public class ActivityLayoutNameRule implements Rule {
 
     @Override
     public String getBriefDescription() {
-        return "Activity布局命名规范";
+        return "Activity布局命名不规范";
     }
 
     @Override

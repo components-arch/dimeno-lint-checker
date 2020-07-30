@@ -1,8 +1,11 @@
-package com.wangzhen.lintchecker.sample;
+package com.wangzhen.lintchecker.sample.activity;
 
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
+
+import com.wangzhen.lintchecker.sample.R;
+import com.wangzhen.lintchecker.sample.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
 

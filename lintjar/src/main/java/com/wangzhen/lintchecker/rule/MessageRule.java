@@ -14,7 +14,7 @@ public class MessageRule implements Rule {
 
     @Override
     public String getBriefDescription() {
-        return "避免直接创建Message";
+        return "Message使用不规范";
     }
 
     @Override

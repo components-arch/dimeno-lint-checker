@@ -1,4 +1,4 @@
-package com.wangzhen.lintchecker.sample;
+package com.wangzhen.lintchecker.sample.base;
 
 import androidx.appcompat.app.AppCompatActivity;
 

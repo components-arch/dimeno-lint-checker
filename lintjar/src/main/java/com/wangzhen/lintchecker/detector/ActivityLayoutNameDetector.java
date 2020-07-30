@@ -13,6 +13,7 @@ import com.wangzhen.lintchecker.callback.Rule;
 import com.wangzhen.lintchecker.rule.ActivityLayoutNameRule;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
 
@@ -34,6 +35,12 @@ public class ActivityLayoutNameDetector extends Detector implements SourceCodeSc
             Severity.WARNING,
             new Implementation(ActivityLayoutNameDetector.class, Scope.JAVA_FILE_SCOPE)
     );
+
+    @Nullable
+    @Override
+    public List<String> applicableSuperClasses() {
+        return Collections.singletonList("android.app.Activity");
+    }
 
     @Override
     public List<String> getApplicableMethodNames() {
