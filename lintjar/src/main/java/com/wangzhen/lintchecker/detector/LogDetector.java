@@ -43,6 +43,10 @@ public class LogDetector extends Detector implements SourceCodeScanner {
 
     @Override
     public void visitMethodCall(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod method) {
-        context.report(ISSUE, node, context.getLocation(node), rule.getExplanation());
+        boolean isMemberInClass = context.getEvaluator().isMemberInClass(method, "android.util.Log");
+        boolean isMemberInSubClassOf = context.getEvaluator().isMemberInSubClassOf(method, "android.util.Log", true);
+        if (isMemberInClass || isMemberInSubClassOf) {
+            context.report(ISSUE, node, context.getLocation(node), rule.getExplanation());
+        }
     }
 }

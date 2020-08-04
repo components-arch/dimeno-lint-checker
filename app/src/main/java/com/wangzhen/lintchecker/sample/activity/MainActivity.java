@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.wangzhen.lintchecker.sample.R;
 import com.wangzhen.lintchecker.sample.base.BaseActivity;
+import com.wangzhen.lintchecker.sample.utils.KLog;
 
 public class MainActivity extends BaseActivity {
 
@@ -24,5 +25,7 @@ public class MainActivity extends BaseActivity {
         }).start();
 
         Message message = new Message();
+
+        KLog.e("");
     }
 }
